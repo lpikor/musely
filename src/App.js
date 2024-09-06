@@ -1,5 +1,5 @@
 import './App.css';
-import Calendar from './components/Calendar/Calendar';
+import MyBigCalendar from './components/MyBigCalendar/MyBigCalendar';
 import Chat from './components/Chat/Chat';
 import Locations from './components/Locations/Locations';
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Chat />
-      <Calendar />
+      <MyBigCalendar />
       <Locations />
     </div>
   );
