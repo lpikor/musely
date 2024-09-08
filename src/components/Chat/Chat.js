@@ -21,8 +21,8 @@ function Chat() {
     }, []);
 
     const sendMessage = (e) => {
-        e.preventDefault();
         socket.emit('chatMessage', message); // Wyślij wiadomość na serwer
+        e.preventDefault();
         setMessage(''); // Wyczyść pole wiadomości
     };
 

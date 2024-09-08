@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const eventRoutes = require('./routes/eventRoutes');
 const locationRoutes = require('./routes/locationRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 const connectDB = require('./config/db');
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api', eventRoutes);
 app.use('/api', locationRoutes);
+app.use('/api', messageRoutes);
 
 // Obsługa Socket.IO
 io.on('connection', (socket) => {
