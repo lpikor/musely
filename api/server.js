@@ -51,6 +51,10 @@ io.on('connection', (socket) => {
         io.emit('chatMessage', message);
     });
 
+    socket.on('deleteMessages', () => {
+        io.emit('deleteMessages');
+    });
+
     socket.on('disconnect', () => {
         console.log('Użytkownik rozłączony');
     });
