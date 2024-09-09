@@ -10,6 +10,7 @@ const socket = io('http://localhost:5001', {
 function Chat() {
     const [message, setMessage] = useState('');
     const [chat, setChat] = useState([]);
+    const [user, setUser] = useState('');
 
     useEffect(() => {
         fetch('http://localhost:5001/api/messages', {
@@ -33,12 +34,10 @@ function Chat() {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        const senderId = 1;
+        const senderId = user;
         const newMessage = { message, senderId };
         
         socket.emit('chatMessage', newMessage);
-
-        console.log(chat);
 
         fetch('http://localhost:5001/api/messages', {
             method: 'POST',
@@ -71,6 +70,12 @@ function Chat() {
                 ))}
             </ul>
             <form onSubmit={sendMessage}>
+                <input
+                    type="text" 
+                    placeholder="User"
+                    value={user}
+                    onChange={(e) => setUser(e.target.value)}
+                />
                 <input
                     type="text"
                     value={message}
