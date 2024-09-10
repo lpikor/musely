@@ -1,0 +1,38 @@
+.chat {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	
+	.messages-list {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		list-style: none;
+		overflow: auto;
+		max-height: 400px;
+		margin-top: 24px;
+		margin-bottom: 24px;
+	}
+
+	.chat-form {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+
+		button[type='submit'] {
+			border: none;
+			background: rgb(75, 141, 255);
+			color: rgb(255, 255, 255);
+			padding: 12px 24px;
+			border-radius: 4px;
+		}
+	}
+
+	.remove-all-messages {
+		border: none;
+		background: rgb(255, 0, 0);
+		color: rgb(255, 255, 255);
+		padding: 12px 24px;
+		border-radius: 4px;
+		margin-top: 16px;
+	}
+}

@@ -74,6 +74,7 @@ function MyBigCalendar() {
 
 	return (
 		<div>
+			<h2>MyBigCalendar</h2>
 			<button onClick={handleDeleteAllEvents} style={{ display: 'none' }}>Usuń wszystkie wydarzenia</button>
 			<Calendar
 				localizer={localizer}

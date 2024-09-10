@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import Message from './Message/Message';
+import './Chat.css';
 
 const socket = io('http://localhost:5001', {
   transports: ['websocket'], // Wymuszamy użycie WebSocket
@@ -59,17 +60,16 @@ function Chat() {
     };
 
     return (
-        <div>
-            <h1>Chat</h1>
-            <button onClick={removeAllMessages}>Usuń wszystkie wiadomości</button>
-            <ul>
+        <div className="chat">
+            <h2>Chat</h2>
+            <ul className="messages-list">
                 {chat.map((msg, index) => (
                     <li key={index}>
                     <Message senderId={msg.senderId} message={msg.message} />
                     </li>
                 ))}
             </ul>
-            <form onSubmit={sendMessage}>
+            <form className="chat-form" onSubmit={sendMessage}>
                 <input
                     type="text" 
                     placeholder="User"
@@ -78,11 +78,13 @@ function Chat() {
                 />
                 <input
                     type="text"
+                    placeholder="Message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                 />
                 <button type="submit">Wyślij</button>
             </form>
+            <button className="remove-all-messages" onClick={removeAllMessages}>Usuń wszystkie wiadomości</button>
         </div>
     );
 }

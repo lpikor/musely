@@ -44,7 +44,7 @@ function Locations() {
 
     return (
         <div>
-            <h1>Locations</h1>
+            <h2>Locations</h2>
             
             {/* Formularz do dodawania nowej miejscówki */}
             <form onSubmit={handleAddLocation}>

@@ -1,7 +1,10 @@
-function Location({key, senderId, message}) {
+import './Message.css';
+
+function Location({senderId, message}) {
 	return (
-	  <div>
-		<p>{senderId}: {message}</p>
+	  <div className="message">
+		<span className="author">{senderId}</span>
+		<p className="content">{message}</p>
 	  </div>
 	);
   }
