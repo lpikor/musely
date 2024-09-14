@@ -3,6 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from '../../firebaseConfig';
 import { useState } from "react";
 import Logo from '../Logo/Logo';
+import './Register.css';
 
 const Register = ({ onSwitchToRegister }) => {
 	const [email, setEmail] = useState("");
@@ -72,11 +73,11 @@ const Register = ({ onSwitchToRegister }) => {
 					<option value="organizer">Organizer</option>
 					<option value="venueOwner">Venue Owner</option>
 				</select>
-				<button type="submit">Register</button>
+				<button className="button" type="submit">Sign up</button>
 			</form>
 			<p className="footnote">
 				Already have an account? 
-				<span onClick={onSwitchToRegister} style={{ cursor: 'pointer', color: 'blue' }}> Login</span>
+				<span onClick={onSwitchToRegister} style={{ cursor: 'pointer', color: 'blue' }}> Sign in</span>
 			</p>
 		</div>
 	);

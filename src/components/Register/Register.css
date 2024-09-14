@@ -1,0 +1,12 @@
+.register {
+	display: flex;
+	flex-direction: column;
+	gap: 64px;
+	text-align: center;
+	width: 100%;
+
+	.footnote {
+		font-size: 14px;
+		color: rgb(150, 150, 150);
+	}
+}
