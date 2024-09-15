@@ -1,0 +1,18 @@
+.nav-item {
+
+	.link {
+		color: inherit;
+		text-decoration: none;
+		padding: 16px;
+		display: block;
+
+		&.active {
+			color: red;
+		}
+
+		svg {
+			width: 24px;
+			height: 24px;
+		}
+	}
+}

@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
 import Logout from './components/Logout/Logout';
 import UserProfile from './components/UserProfile/UserProfile';
+import NavMenu from './components/NavMenu/NavMenu';
 import { auth } from './firebaseConfig'; // Zakładam, że masz skonfigurowane Firebase
 import { onAuthStateChanged } from 'firebase/auth';
 import { fetchUserProfile } from './firebaseFunctions';
@@ -52,10 +53,11 @@ function App() {
 			) : (
 				// Jeśli użytkownik jest zalogowany, wyświetl resztę aplikacji
 				<>
+					<NavMenu />
 					<Logout />
 					{userProfile && <UserProfile profile={userProfile} />}
 					<Profile />
-					<Chat />
+					{/* <Chat /> */}
 					<MyBigCalendar />
 					<Locations />
 				</>

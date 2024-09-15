@@ -1,0 +1,16 @@
+.nav-menu {
+	position: fixed;
+	bottom: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 5;
+	background-color: #d5ffdd; 
+	padding: 4px;
+	border-radius: 16px;
+
+	.nav-list {
+		display: flex;
+		gap: 24px;
+		list-style: none;
+	}
+}
