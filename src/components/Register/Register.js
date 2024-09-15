@@ -2,26 +2,26 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from '../../firebaseConfig';
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './Register.css';
 
-const Register = ({ onSwitchToRegister }) => {
+const Register = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [role, setRole] = useState("musician"); // Domyślna wartość
+	const [role, setRole] = useState("musician");
+	const navigate = useNavigate();
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
 		const auth = getAuth();
 
 		try {
-			// Rejestracja w Firebase Authentication
 			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 			const user = userCredential.user;
 
-			// Tworzenie profilu użytkownika w Firestore
 			await setDoc(doc(db, "users", user.uid), {
 				firstName,
 				lastName,
@@ -76,8 +76,8 @@ const Register = ({ onSwitchToRegister }) => {
 				<button className="button" type="submit">Sign up</button>
 			</form>
 			<p className="footnote">
-				Already have an account? 
-				<span onClick={onSwitchToRegister} style={{ cursor: 'pointer', color: 'blue' }}> Sign in</span>
+				Already have an account?
+				<span onClick={() => navigate('/login')} style={{ cursor: 'pointer', color: 'blue' }}> Sign in</span>
 			</p>
 		</div>
 	);

@@ -1,13 +1,15 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import '../../firebaseConfig';
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './Login.css';
 
-const Login = ({ onSwitchToRegister }) => {  // Przekazujemy props
+const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const auth = getAuth();
+	const navigate = useNavigate();
 
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -42,7 +44,7 @@ const Login = ({ onSwitchToRegister }) => {  // Przekazujemy props
 			</form>
 			<p className="footnote">
 				Don't have an account?
-				<span onClick={onSwitchToRegister} style={{ cursor: 'pointer', color: 'blue' }}> Sign up</span>
+				<span onClick={() => navigate('/register')} style={{ cursor: 'pointer', color: 'blue' }}> Sign up</span>
 			</p>
 		</div>
 	);
