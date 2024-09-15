@@ -1,12 +1,13 @@
 .nav-menu {
 	position: fixed;
-	bottom: 8px;
+	bottom: 16px;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 5;
-	background-color: #d5ffdd; 
+	background-color: #ffffff; 
 	padding: 4px;
 	border-radius: 16px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 
 	.nav-list {
 		display: flex;
