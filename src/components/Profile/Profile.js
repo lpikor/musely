@@ -1,5 +1,6 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
+import Logout from "../Logout/Logout";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -15,6 +16,7 @@ const Profile = () => {
 
   return (
     <div>
+      <Logout />
       {user ? <p>Logged in as {user.email}</p> : <p>No user logged in</p>}
     </div>
   );

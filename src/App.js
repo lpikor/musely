@@ -6,7 +6,6 @@ import Locations from './components/Locations/Locations';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Profile from './components/Profile/Profile';
-import Logout from './components/Logout/Logout';
 import UserProfile from './components/UserProfile/UserProfile';
 import NavMenu from './components/NavMenu/NavMenu';
 import { auth } from './firebaseConfig';
@@ -46,14 +45,13 @@ function App() {
 				) : (
 					<>
 						<NavMenu />
-						<Logout />
 						<Routes>
 							<Route path="/profile" element={<Profile />} />
 							<Route path="/calendar" element={<MyBigCalendar />} />
 							<Route path="/locations" element={<Locations />} />
 							<Route path="/user-profile" element={<UserProfile profile={userProfile} />} />
 							<Route path="/" element={<Chat />} />
-							<Route path="*" element={<Navigate to="/profile" />} />
+							<Route path="*" element={<Navigate to="/" />} />
 						</Routes>
 					</>
 				)}
