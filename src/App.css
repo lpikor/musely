@@ -5,4 +5,8 @@
 	align-items: center;
 	min-height: 100vh;
 	padding: 40px;
+
+	@media (min-width: 1024px) {
+		padding-left: 112px;
+	}
 }
