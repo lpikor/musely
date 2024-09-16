@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import Message from './Message/Message';
 import './Chat.css';
@@ -13,13 +13,22 @@ function Chat() {
     const [chat, setChat] = useState([]);
     const [user, setUser] = useState('');
 
+    const messagesEndRef = useRef(null); // Referencja do końca listy wiadomości
+
+    // Funkcja przewijająca na dół listy wiadomości
+    const scrollToBottom = () => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     useEffect(() => {
         fetch('http://localhost:5001/api/messages', {
             method: 'GET'
         })
             .then((res) => res.json())
             .then((data) => setChat(data));
-            
+
         socket.on('chatMessage', (message) => {
             setChat((prevChat) => [...prevChat, message]);
         });
@@ -33,11 +42,16 @@ function Chat() {
         };
     }, []);
 
+    // Scrollujemy za każdym razem, gdy chat się zmieni (czyli gdy przyjdzie nowa wiadomość)
+    useEffect(() => {
+        scrollToBottom();
+    }, [chat]);
+
     const sendMessage = (e) => {
         e.preventDefault();
         const senderId = user;
         const newMessage = { message, senderId };
-        
+
         socket.emit('chatMessage', newMessage);
 
         fetch('http://localhost:5001/api/messages', {
@@ -47,7 +61,8 @@ function Chat() {
             },
             body: JSON.stringify(newMessage)
         })
-            .then((res) => res.json())
+            .then((res) => res.json());
+        
         setMessage(''); // Wyczyść pole wiadomości
     };
 
@@ -65,13 +80,15 @@ function Chat() {
             <ul className="messages-list">
                 {chat.map((msg, index) => (
                     <li key={index}>
-                    <Message senderId={msg.senderId} message={msg.message} />
+                        <Message senderId={msg.senderId} message={msg.message} />
                     </li>
                 ))}
+                {/* Niewidoczny element, który przewijamy na dół */}
+                <div ref={messagesEndRef}></div>
             </ul>
             <form className="chat-form" onSubmit={sendMessage}>
                 <input
-                    type="text" 
+                    type="text"
                     placeholder="User"
                     value={user}
                     onChange={(e) => setUser(e.target.value)}
