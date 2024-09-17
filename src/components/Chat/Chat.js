@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import Message from './Message/Message';
 import './Chat.css';
+import { getAuth } from 'firebase/auth';
 
 const socket = io('http://localhost:5001', {
   transports: ['websocket'], // Wymuszamy użycie WebSocket
@@ -49,21 +50,31 @@ function Chat() {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        const senderId = user;
-        const newMessage = { message, senderId };
-
-        socket.emit('chatMessage', newMessage);
-
-        fetch('http://localhost:5001/api/messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newMessage)
-        })
+    
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+    
+        if (currentUser) {
+            const senderId = currentUser.uid; // Pobieramy uid zamiast e-maila
+            const newMessage = { message, senderId };
+    
+            // Wysyłanie wiadomości przez Socket.io
+            socket.emit('chatMessage', newMessage);
+    
+            // Wysyłanie wiadomości do API backendu
+            fetch('http://localhost:5001/api/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newMessage)
+            })
             .then((res) => res.json());
-        
-        setMessage(''); // Wyczyść pole wiadomości
+    
+            setMessage(''); // Wyczyść pole wiadomości
+        } else {
+            console.log('Użytkownik nie jest zalogowany');
+        }
     };
 
     const removeAllMessages = () => {
@@ -87,12 +98,6 @@ function Chat() {
                 <div ref={messagesEndRef}></div>
             </ul>
             <form className="chat-form" onSubmit={sendMessage}>
-                <input
-                    type="text"
-                    placeholder="User"
-                    value={user}
-                    onChange={(e) => setUser(e.target.value)}
-                />
                 <input
                     type="text"
                     placeholder="Message"
